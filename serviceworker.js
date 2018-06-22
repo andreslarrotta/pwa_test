@@ -1,8 +1,6 @@
 (function () {
   "use strict";
-
   var cacheNameStatic = 'cloudinary-pwa-jquery-v2';
-
   var currentCacheNames = [ cacheNameStatic ];
 
   var cachedUrls = [
