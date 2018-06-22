@@ -1,0 +1,93 @@
+// (function () {
+//   "use strict";
+//   var cacheNameStatic = 'cloudinary-pwa-jquery-v2';
+//   var currentCacheNames = [ cacheNameStatic ];
+
+//   var cachedUrls = [
+//     // 3rd party CDN
+//     'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css',
+//     'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js',
+//     'https://unpkg.com/babel-core@5.8.38/browser.min.js',
+//     'https://unpkg.com/jquery',
+//     'https://unpkg.com/cloudinary-jquery',
+//     // Local assets
+//     '/style.css',
+//     // Fake API
+//     '/images.json'
+//   ];
+
+// addEventListener('beforeinstallprompt', function(e) {
+//   // beforeinstallprompt Event fired
+
+//   // e.userChoice will return a Promise. 
+//   // For more details read: https://developers.google.com/web/fundamentals/getting-started/primers/promises
+//   e.userChoice.then(function(choiceResult) {
+
+//     console.log(choiceResult.outcome);
+
+//     if(choiceResult.outcome == 'dismissed') {
+//       console.log('User cancelled home screen install');
+//     }
+//     else {
+//       console.log('User added to home screen');
+//     }
+//   });
+// });
+//   // A new ServiceWorker has been registered
+//   self.addEventListener("install", function (event) {
+//     event.waitUntil(
+//       caches.delete(cacheNameStatic).then(function() {
+//         return caches.open(cacheNameStatic);
+//       }).then(function (cache) {
+//         return cache.addAll(cachedUrls);
+//       }).catch(function(e) {
+//       })
+//     );
+//   });
+
+//   // A new ServiceWorker is now active
+//   self.addEventListener("activate", function (event) {
+//     event.waitUntil(
+//       caches.keys()
+//         .then(function (cacheNames) {
+//           return Promise.all(
+//             cacheNames.map(function (cacheName) {
+//               if (currentCacheNames.indexOf(cacheName) === -1) {
+//                 return caches.delete(cacheName);
+//               }
+//             })
+//           );
+//         })
+//     );
+//   });
+
+//   // Save thing to cache in process of use
+//   self.addEventListener('fetch', function(event) {
+//   event.respondWith(
+//     caches.open(cacheNameStatic).then(function(cache) {
+//       return cache.match(event.request).then(function(response) {
+//         var fetchPromise = fetch(event.request).then(function(networkResponse) {
+//           cache.put(event.request, networkResponse.clone());
+//           return networkResponse;
+//         })
+//         return response || fetchPromise;
+//       })
+//     })
+//   );
+// });
+
+// })();
+
+(function(){
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js').then(function(registration) {
+        // Registration was successful
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      }).catch(function(err) {
+        // registration failed :(
+        console.log('ServiceWorker registration failed: ', err);
+      });
+    });
+  }
+})
