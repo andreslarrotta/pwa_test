@@ -61,30 +61,10 @@
     <script src="https://unpkg.com/jquery" type="text/javascript"></script>
     <script src="https://unpkg.com/cloudinary-jquery" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+    <script src="./sw.js"></script>
     <script type="text/javascript">
-
    // Add Service Worker
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./serviceworker.js', { scope: './' }).then(function(reg) {
-
-        if (reg.installing) {
-          console.log('Service worker installing');
-        } else if (reg.waiting) {
-          console.log('Service worker installed');
-        } else if (reg.active) {
-          console.log('Service worker active');
-        }
-
-      }).catch(function(error) {
-        // registration failed
-        console.log('Registration failed with ' + error);
-      });
-    }
-
-
-    $(document).ready(function() {
-
-
+       $(document).ready(function() {
       // Apply Modal
       $('.modal').modal();
 
