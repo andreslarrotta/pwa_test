@@ -1,35 +1,31 @@
 {
-  "short_name": "https://eloqua.code-labs.com/pwa",
-  "name": "https://eloqua.code-labs.com/pwa",
-  "display": "standalone",
-  "icons": [
-    {
-      "src": "images/icons/icon-48.png",
-      "sizes": "48x48",
-      "type": "image/png"
-    },
-    {
-      "src": "images/icons/icon-96.png",
-      "sizes": "96x96",
-      "type": "image/png"
-    },
-    {
-      "src": "images/icons/icon-144.png",
-      "sizes": "144x144",
-      "type": "image/png"
-    },
-    {
-      "src": "images/icons/icon-196.png",
-      "sizes": "196x196",
-      "type": "image/png"
-    },
-    {
-      "src": "images/icons/icon-384.png",
-      "sizes": "384x384",
-      "type": "image/png"
-    }
-  ],
-  "start_url": "index.html?launcher=true",
-  "theme_color": "#a040a0",
-  "background_color": "#EEEEEE"
+    "short_name": "testpwa",
+    "name": "https://eloqua.code-labs.com/pwa",
+    "display": "standalone",
+    "start_url": "https://eloqua.code-labs.com/pwa/index.html?launcher=true",
+    "theme_color": "#a040a0",
+    "background_color": "#EEEEEE",
+    "lang": "",
+    "orientation": "undefined",
+    "icons": [{
+            "src": "https://eloqua.code-labs.com/images/icons/icon-48.png",
+            "sizes": "48x48"
+        },
+        {
+            "src": "https://eloqua.code-labs.com/images/icons/icon-96.png",
+            "sizes": "96x96"
+        },
+        {
+            "src": "https://eloqua.code-labs.com/images/icons/icon-144.png",
+            "sizes": "144x144"
+        },
+        {
+            "src": "https://eloqua.code-labs.com/images/icons/icon-196.png",
+            "sizes": "196x196"
+        },
+        {
+            "src": "https://eloqua.code-labs.com/images/icons/icon-384.png",
+            "sizes": "384x384"
+        }
+    ]
 }
