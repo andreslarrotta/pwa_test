@@ -3,7 +3,7 @@
 var CACHE = 'pwabuilder-precache';
 var precacheFiles = [
     /* Add an array of files to precache for your app */
-    '/'
+    '/pwa/'
 ];
 
 //Install stage sets up the cache-array to configure pre-cache content

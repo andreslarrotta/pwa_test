@@ -8,23 +8,23 @@
     "lang": "",
     "orientation": "portrait",
     "icons": [{
-            "src": "https://eloqua.code-labs.com/images/icons/icon-48.png",
+            "src": "https://eloqua.code-labs.com/pwa/images/icons/icon-48.png",
             "sizes": "48x48"
         },
         {
-            "src": "https://eloqua.code-labs.com/images/icons/icon-96.png",
+            "src": "https://eloqua.code-labs.com/pwa/images/icons/icon-96.png",
             "sizes": "96x96"
         },
         {
-            "src": "https://eloqua.code-labs.com/images/icons/icon-144.png",
+            "src": "https://eloqua.code-labs.com/pwa/images/icons/icon-144.png",
             "sizes": "144x144"
         },
         {
-            "src": "https://eloqua.code-labs.com/images/icons/icon-196.png",
+            "src": "https://eloqua.code-labs.com/pwa/images/icons/icon-196.png",
             "sizes": "196x196"
         },
         {
-            "src": "https://eloqua.code-labs.com/images/icons/icon-384.png",
+            "src": "https://eloqua.code-labs.com/pwa/images/icons/icon-384.png",
             "sizes": "384x384"
         }
     ]
