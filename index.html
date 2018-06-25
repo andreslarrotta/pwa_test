@@ -162,6 +162,7 @@
             </div>
         </div>
     </footer>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
     <script>
         $(function() {
             //This is the service worker with the Cache-first network
@@ -179,6 +180,14 @@
                 });
             }
             guardarIphone();
+
+            function displayNotification() {
+                if (Notification.permission == 'granted') {
+                    navigator.serviceWorker.getRegistration().then(function(reg) {
+                        reg.showNotification('Hello world!');
+                    });
+                }
+            }
         });
 
         function guardarIphone() {
@@ -197,6 +206,18 @@
                 });
             }
         };
+    </script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyD9_8KbTQddlAvB5NeLlVUVUFe2hrk8ehw",
+            authDomain: "notificationspwa.firebaseapp.com",
+            databaseURL: "https://notificationspwa.firebaseio.com",
+            projectId: "notificationspwa",
+            storageBucket: "notificationspwa.appspot.com",
+            messagingSenderId: "84944777024"
+        };
+        firebase.initializeApp(config);
     </script>
 </body>
 
