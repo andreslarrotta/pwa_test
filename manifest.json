@@ -2,12 +2,12 @@
     "short_name": "testpwa",
     "name": "https://eloqua.code-labs.com/pwa",
     "display": "standalone",
-    "gcm_sender_id": "AIzaSyDDRpka6_3MI13j3lLwIvPwbPLsIlGqIag",
     "start_url": "https://eloqua.code-labs.com/pwa/index.html?launcher=true",
     "theme_color": "#a040a0",
     "background_color": "#EEEEEE",
     "lang": "",
     "orientation": "portrait",
+    "gcm_sender_id": "AIzaSyDDRpka6_3MI13j3lLwIvPwbPLsIlGqIag",
     "icons": [{
             "src": "https://eloqua.code-labs.com/pwa/images/icons/icon-48.png",
             "sizes": "48x48"
