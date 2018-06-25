@@ -6,7 +6,7 @@
     "theme_color": "#a040a0",
     "background_color": "#EEEEEE",
     "lang": "",
-    "orientation": "undefined",
+    "orientation": "portrait",
     "icons": [{
             "src": "https://eloqua.code-labs.com/images/icons/icon-48.png",
             "sizes": "48x48"
