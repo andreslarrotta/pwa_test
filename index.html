@@ -1,95 +1,98 @@
 <!DOCTYPE>
 <html>
-  <head>
+
+<head>
     <title>jQuery Progressive Web App Demo</title>
 
     <!-- Manifest -->
     <link rel="manifest" href="manifest.json">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#a040a0">
-  <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#a040a0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
-  <link rel="icon" href="favicon.ico" type="image/x-icon"/>
-  <link rel="manifest" href="manifest.json"/>
-  <link rel="apple-touch-icon" href="img/icon-48.png">
-  <link rel="apple-touch-icon" sizes="96x96" href="img/icon-96.png">
-  <link rel="apple-touch-icon" sizes="196x196" href="img/icon-196.png">
-  <link rel="dns-prefetch" href="https://nolan.cloudant.com">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="img/icon-48.png">
+    <link rel="apple-touch-icon" sizes="96x96" href="img/icon-96.png">
+    <link rel="apple-touch-icon" sizes="196x196" href="img/icon-196.png">
+    <link rel="dns-prefetch" href="https://nolan.cloudant.com">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
     <!-- Style -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
     <link rel="stylesheet" href="./style.css">
-  </head>
-  <body>
+</head>
+
+<body>
     <nav>
-      <div class="nav-wrapper">
-        <a href="./" alt="Cloudinary PWA Demo" class="brand-logo" id="nav-logo" >
-        </a>
-      </div>
+        <div class="nav-wrapper">
+            <a href="./" alt="Cloudinary PWA Demo" class="brand-logo" id="nav-logo">
+            </a>
+        </div>
     </nav>
     <div class="container">
-      <div class="row" id="person-list">
-        Loading..
-      </div>
+        <div class="row" id="person-list">
+            Loading..
+        </div>
     </div>
     <footer class="page-footer">
-      <div class="container">
-        <div class="row">
-          <div class="col l6 s12">
-            <h5 class="white-text">jQuery Progressive Web App Demo</h5>
-            <p class="grey-text text-lighten-4">See how to super charge your web app by following the tenets of Progressive Web Apps and using service worker progressively.</p>
-          </div>
-        </div>
-      </div>
-      <div class="footer-copyright">
         <div class="container">
-        © 2017 Copyright Cloudinary
-        <a class="grey-text text-lighten-4 right" href="https://elsmore.me">Made with &#9829; by Mike Elsmore</a>
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">jQuery Progressive Web App Demo</h5>
+                    <p class="grey-text text-lighten-4">See how to super charge your web app by following the tenets of Progressive Web Apps and using service worker progressively.</p>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2017 Copyright Cloudinary
+                <a class="grey-text text-lighten-4 right" href="https://elsmore.me">Made with &#9829; by Mike Elsmore</a>
+            </div>
+        </div>
     </footer>
     <div class="modal modal-fixed-footer">
-      <div class="modal-content"  id="person-view">
-      </div>
-      <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
-      </div>
+        <div class="modal-content" id="person-view">
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+        </div>
     </div>
     <script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
     <script src="https://unpkg.com/jquery" type="text/javascript"></script>
     <script src="https://unpkg.com/cloudinary-jquery" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
-    <script src="./sw.js"></script>
     <script type="text/javascript">
-   // Add Service Worker
-       $(document).ready(function() {
-      // Apply Modal
-      $('.modal').modal();
+        // Add Service Worker
+        $(document).ready(function() {
+            // Apply Modal
+            $('.modal').modal();
 
-      // Instantiate the Cloudinary jQuery module
-      const cl = cloudinary.CloudinaryJQuery.new( { cloud_name: "elsmore-me"});
+            // Instantiate the Cloudinary jQuery module
+            const cl = cloudinary.CloudinaryJQuery.new({
+                cloud_name: "elsmore-me"
+            });
 
-      // Apply the Cloudinary logo to the header
-      let cloudinaryLogo = cl.imageTag("cloudinary_logo");
-      cloudinaryLogo.transformation().width(200);
-      $('nav #nav-logo').html(cloudinaryLogo.toHtml());
+            // Apply the Cloudinary logo to the header
+            let cloudinaryLogo = cl.imageTag("cloudinary_logo");
+            cloudinaryLogo.transformation().width(200);
+            $('nav #nav-logo').html(cloudinaryLogo.toHtml());
 
-      // View the photo
-      function viewPhoto(e) {
-        e.preventDefault();
+            // View the photo
+            function viewPhoto(e) {
+                e.preventDefault();
 
-        let publicId = $(this).attr('public-id');
-        $.get('./images.json', function(result, error) {
-          result.forEach(function(value) {
-            if(value.publicId == publicId) {
-              let tr = cloudinary.Transformation.new();
-              tr.overlay('cloudinary_logo').width('500').x('10').y('10').opacity('70').gravity('south_east');
-              let imageUrlOriginal = cl.url(publicId, tr);
-              tr.chain().crop('fit').width('800');
-              let imageUrl = cl.url(publicId, tr);
-              $('#person-view').html(`
+                let publicId = $(this).attr('public-id');
+                $.get('./images.json', function(result, error) {
+                    result.forEach(function(value) {
+                        if (value.publicId == publicId) {
+                            let tr = cloudinary.Transformation.new();
+                            tr.overlay('cloudinary_logo').width('500').x('10').y('10').opacity('70').gravity('south_east');
+                            let imageUrlOriginal = cl.url(publicId, tr);
+                            tr.chain().crop('fit').width('800');
+                            let imageUrl = cl.url(publicId, tr);
+                            $('#person-view').html(`
                 <div class="col s12" >
                   <h1 class="center-align">${value.name}</h1>
                 </div>
@@ -111,23 +114,23 @@
                   </div>
                 </div>
               `)
-              $('.modal').modal('open');
-            }
-          });
-        });
-      };
+                            $('.modal').modal('open');
+                        }
+                    });
+                });
+            };
 
-      // List out the images
-      let tr = cloudinary.Transformation.new();
-      tr.crop('thumb').gravity('face').height('500').width('500').chain()
-        .crop('fill').height('150').width('300').chain()
-        .overlay('cloudinary_logo').gravity('south_east').width('100').opacity('70').x('10').y('10');
-      $.get('./images.json', function(result, error) {
-        $('#person-list').html('');
-        result.forEach(function(value) {
-          let personThumbImage = cl.url(value.publicId, tr);
-          // $('#person-list').append('<div class="col l3 m4 s12"><photo-thumb id="'+value.publicId+'" public-id="'+value.publicId+'" image-url="'+personThumbImage+'" image-name="'+value.name+'"></photo-thumb></div>');
-          $('#person-list').append(`
+            // List out the images
+            let tr = cloudinary.Transformation.new();
+            tr.crop('thumb').gravity('face').height('500').width('500').chain()
+                .crop('fill').height('150').width('300').chain()
+                .overlay('cloudinary_logo').gravity('south_east').width('100').opacity('70').x('10').y('10');
+            $.get('./images.json', function(result, error) {
+                $('#person-list').html('');
+                result.forEach(function(value) {
+                    let personThumbImage = cl.url(value.publicId, tr);
+                    // $('#person-list').append('<div class="col l3 m4 s12"><photo-thumb id="'+value.publicId+'" public-id="'+value.publicId+'" image-url="'+personThumbImage+'" image-name="'+value.name+'"></photo-thumb></div>');
+                    $('#person-list').append(`
             <div class="col l3 m4 s12">
               <div class="card hoverable small">
                 <div class="card-image">
@@ -143,10 +146,29 @@
               </div>
             </div>
           `);
-          $('.photo-view').on('click', viewPhoto);
+                    $('.photo-view').on('click', viewPhoto);
+                });
+            });
         });
-      });
-    });
     </script>
-  </body>
+    <script>
+        $(function() {
+            //This is the service worker with the combined offline experience (Offline page + Offline copy of pages)
+
+            //Add this below content to your HTML page, or add the js file to your page at the very top to register service worker
+            if (navigator.serviceWorker.controller) {
+                console.log('[PWA Builder] active service worker found, no need to register')
+            } else {
+
+                //Register the ServiceWorker
+                navigator.serviceWorker.register('pwabuilder-sw.js', {
+                    scope: './'
+                }).then(function(reg) {
+                    console.log('Service worker has been registered for scope:' + reg.scope);
+                });
+            }
+        });
+    </script>
+</body>
+
 </html>
