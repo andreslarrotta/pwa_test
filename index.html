@@ -42,7 +42,7 @@
         </div>
     </nav>
     <div class="container">
-        <button class="js-push-button" disabled>
+        <button class="js-push-button">
                     Enable Push Messages
                   </button>
         <div class="row" id="person-list">
@@ -178,6 +178,7 @@
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
     <script>
         $(function() {
+            mensajeNotificacion();
             //This is the service worker with the Cache-first network
 
             //Add this below content to your HTML page, or add the js file to your page at the very top to register service worker
@@ -231,6 +232,35 @@
             messagingSenderId: "84944777024"
         };
         firebase.initializeApp(config);
+
+        function mensajeNotificacion() {
+            if (!('Notification' in window)) {
+                console.log('This browser does not support notifications!');
+                return;
+            }
+            Notification.requestPermission(function(status) {
+                console.log('Notification permission status:', status);
+            });
+
+        }
+
+        $('.js-push-button').on('click', function() {
+            console.log('hola');
+            if (Notification.permission == 'granted') {
+                navigator.serviceWorker.getRegistration().then(function(reg) {
+                    var options = {
+                        body: 'Mi primera notificación XD',
+                        icon: './chrome-touch-icon-192x192.png',
+                        vibrate: [100, 50, 100],
+                        data: {
+                            dateOfArrival: Date.now(),
+                            primaryKey: 1
+                        }
+                    };
+                    reg.showNotification('Hello world!', options);
+                });
+            }
+        });
     </script>
 </body>
 
