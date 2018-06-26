@@ -14,8 +14,6 @@ self.addEventListener('install', function(evt) {
         return self.skipWaiting();
     }));
 });
-
-
 //allow sw to control of current page
 self.addEventListener('activate', function(event) {
     console.log('[PWA Builder] Claiming clients for current page');
@@ -27,7 +25,18 @@ self.addEventListener('fetch', function(evt) {
     evt.respondWith(fromCache(evt.request).catch(fromServer(evt.request)));
     evt.waitUntil(update(evt.request));
 });
+self.addEventListener('notificationclick', function(e) {
+    var notification = e.notification;
+    var primaryKey = notification.data.primaryKey;
+    var action = e.action;
 
+    if (action === 'close') {
+        notification.close();
+    } else {
+        clients.openWindow('http://www.example.com');
+        notification.close();
+    }
+});
 
 function precache() {
     return caches.open(CACHE).then(function(cache) {

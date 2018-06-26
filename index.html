@@ -45,6 +45,10 @@
         <button class="js-push-button">
                     Enable Push Messages
                   </button>
+        <div id="token"></div>
+        <div id="msg"></div>
+        <div id="notis"></div>
+        <div id="err"></div>
         <div class="row" id="person-list">
             <div class="col l3 m4 s12">
                 <div class="card hoverable small">
@@ -233,6 +237,18 @@
         };
         firebase.initializeApp(config);
 
+        const messaging = firebase.messaging();
+        messaging
+            .requestPermission()
+            .then(function() {
+                MsgElem.innerHTML = "Notification permission granted."
+                console.log("Notification permission granted.");
+            })
+            .catch(function(err) {
+                ErrElem.innerHTML = ErrElem.innerHTML + "; " + err
+                console.log("Unable to get permission to notify.", err);
+            });
+
         function mensajeNotificacion() {
             if (!('Notification' in window)) {
                 console.log('This browser does not support notifications!');
@@ -261,6 +277,8 @@
                 });
             }
         });
+    </script>
+    <script>
     </script>
 </body>
 
